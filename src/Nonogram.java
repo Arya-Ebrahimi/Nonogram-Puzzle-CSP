@@ -58,17 +58,23 @@ public class Nonogram {
     private ArrayList<String> LCV (State state, int[] var) {
         return state.getDomain().get(var[0]).get(var[1]);
     } 
-
+    
     private int[] MRV (State state) {
         ArrayList<ArrayList<String>> cBoard = state.getBoard();
+        ArrayList<ArrayList<ArrayList<String>>> cDomain = state.getDomain();
 
+        int min = Integer.MAX_VALUE;
         int[] result = new int[2];
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (cBoard.get(i).get(j).equals("E")) {
-                    result[0] = i;
-                    result[1] = j;
+                    int val = cDomain.get(i).get(j).size();
+                    if (val < min) {
+                        min = val;
+                        result[0] = i;
+                        result[1] = j;
+                    }
                 }
             }
         }
@@ -126,8 +132,6 @@ public class Nonogram {
                 if (cBoard.get(i).get(j).equals("F")) {
                     flag = true;
                     count++;
-                } else if (cBoard.get(i).get(j).equals("E")) {
-                    break;
                 } else if (cBoard.get(i).get(j).equals("X")) {
                     if (flag) {
                         flag = false;
@@ -163,7 +167,7 @@ public class Nonogram {
                     count_x++;
                 }
             }
-            if (count_x > n - sum) {
+            if (count_x > n -sum) {
                 return false;
             }
             if (count_f != sum && count_e == 0) {
@@ -178,8 +182,6 @@ public class Nonogram {
                 if (cBoard.get(i).get(j).equals("F")) {
                     flag = true;
                     count++;
-                } else if (cBoard.get(i).get(j).equals("E")) {
-                    break;
                 } else if (cBoard.get(i).get(j).equals("X")) {
                     if (flag) {
                         flag = false;
