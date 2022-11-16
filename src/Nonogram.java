@@ -68,7 +68,7 @@ public class Nonogram {
             for (int j = 0; j < n; j++) {
                 if (cBoard.get(i).get(j).equals("E")) {
                     result[0] = i;
-                    result[1] = j; 
+                    result[1] = j;
                 }
             }
         }
@@ -126,6 +126,8 @@ public class Nonogram {
                 if (cBoard.get(i).get(j).equals("F")) {
                     flag = true;
                     count++;
+                } else if (cBoard.get(i).get(j).equals("E")) {
+                    break;
                 } else if (cBoard.get(i).get(j).equals("X")) {
                     if (flag) {
                         flag = false;
@@ -161,7 +163,7 @@ public class Nonogram {
                     count_x++;
                 }
             }
-            if (count_x > n -sum) {
+            if (count_x > n - sum) {
                 return false;
             }
             if (count_f != sum && count_e == 0) {
@@ -176,6 +178,8 @@ public class Nonogram {
                 if (cBoard.get(i).get(j).equals("F")) {
                     flag = true;
                     count++;
+                } else if (cBoard.get(i).get(j).equals("E")) {
+                    break;
                 } else if (cBoard.get(i).get(j).equals("X")) {
                     if (flag) {
                         flag = false;
